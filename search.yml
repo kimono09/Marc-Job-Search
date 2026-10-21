@@ -1,0 +1,30 @@
+name: search
+on:
+  schedule:
+    - cron: "0 6,9,12,15,18 * * *"   # five runs a day, UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: search
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python search.py
+        env:
+          REED_API_KEY: ${{ secrets.REED_API_KEY }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - run: |
+          git config user.name "jobsearch-bot"
+          git config user.email "jobsearch-bot@users.noreply.github.com"
+          git add data docs
+          git diff --cached --quiet || (git commit -m "Update $(date -u +%F-%H%M)" && git push)

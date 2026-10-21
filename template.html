@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>London Food & Hospitality Job Tracker</title>
+<style>
+:root{--bg:#faf7f2;--fg:#1f1b16;--mu:#6b645a;--ln:#e4ddd0;--ac:#a2381f;--cd:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17140f;--fg:#efe9dd;--mu:#a39a8b;--ln:#332e25;--ac:#e8836a;--cd:#1f1b15;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17140f;--fg:#efe9dd;--mu:#a39a8b;--ln:#332e25;--ac:#e8836a;--cd:#1f1b15;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 Georgia,"Times New Roman",serif}
+main{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:26px;margin:0 0 4px}.sub{color:var(--mu);font:13px system-ui,sans-serif;margin:0 0 16px}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+button,select,input{font:13px system-ui,sans-serif;color:var(--fg);background:var(--cd);border:1px solid var(--ln);border-radius:6px;padding:6px 10px}
+button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.box{background:var(--cd);border:1px solid var(--ln);border-radius:8px;padding:12px 14px;margin:0 0 12px}
+.box b{font-family:system-ui,sans-serif}.box ol{margin:6px 0 0;padding-left:20px}
+.c{background:var(--cd);border:1px solid var(--ln);border-radius:8px;padding:12px 14px;margin:0 0 10px}
+.c h3{margin:0;font-size:17px}.m{color:var(--mu);font:13px system-ui,sans-serif;margin:2px 0 6px}
+.c p{margin:4px 0;font-size:14px}.g{color:var(--mu)}
+.r{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px;font:13px system-ui,sans-serif}
+.r input{flex:1;min-width:140px}
+.t{display:inline-block;font:11px system-ui,sans-serif;border:1px solid var(--ac);color:var(--ac);border-radius:10px;padding:1px 8px;margin-left:6px;vertical-align:2px}
+a{color:var(--ac)}.w{overflow-x:auto}table{border-collapse:collapse;width:100%;font:13px system-ui,sans-serif}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--ln);vertical-align:top}
+.note{color:var(--mu);font:12px system-ui,sans-serif}.hd{font:600 14px system-ui,sans-serif;margin:18px 0 6px}
+</style></head><body><main>
+<h1>London social &amp; content jobs</h1>
+<p class="sub">Updated __UPDATED__ · refreshed five times a day · salary floor £39,000 where disclosed · statuses and notes save in this browser only</p>
+<nav id="tabs"></nav><div id="root"></div>
+<p class="note">Scores are provisional: Job Match is based only on the advert text, with no profile from you yet. Employer Fit is blank until I have evidence on each brand’s content. Nothing here has been confirmed with an employer.</p>
+</main>
+<script type="application/json" id="d">__DATA__</script>
+<script>
+const D=JSON.parse(document.getElementById('d').textContent);
+let S={};try{S=JSON.parse(localStorage.getItem('jt')||'{}')}catch(e){}
+const ST=['New','Shortlisted','Saved','Applied','Interviewing','Rejected','Not interested','Closed'];
+let tab='f',fs='',tm;
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const g=(id,k,d)=>(S[id]&&S[id][k])||d;
+const IND=[['f','Food & drink'],['h','Hotels & luxury'],['c','Culture & arts'],['r','Fashion & retail'],['w','Wellness'],['o','Other creative']];const TABS=IND.concat([['e','Employers'],['s','Speculative']]);
+function opts(cur){return ST.map(o=>'<option'+(o===cur?' selected':'')+'>'+o+'</option>').join('')}
+function job(j){const s=g(j.id,'s','New');
+return '<article class="c"><h3>'+esc(j.t)+'<span class="t">'+(j.b||(j.k==='v'?'dated listing':'unverified'))+'</span></h3><div class="m">'+esc(j.e)+' · '+esc(j.sal)+' · published '+esc(j.pub)+' · first seen '+esc(j.fs||'21 Oct 2026')+'</div><p>'+esc(j.ev)+'</p><p class="g">Gaps / risks: '+esc(j.gap)+'</p><div class="r"><select data-id="'+j.id+'" data-k="s">'+opts(s)+'</select><input data-id="'+j.id+'" data-k="n" placeholder="Notes" value="'+esc(g(j.id,'n',''))+'"><span>Match '+(j.jm==null?'n/a':j.jm+' (provisional)')+' · Employer Fit —</span><a href="'+esc(j.src)+'" target="_blank" rel="noopener">'+esc(j.sn)+'</a></div></article>'}
+function render(){
+document.getElementById('tabs').innerHTML=TABS.map(t=>'<button data-tab="'+t[0]+'" class="'+(t[0]===tab?'on':'')+'">'+t[1]+'</button>').join('')+(tab!=='e'&&tab!=='s'?'<select id="f"><option value="">All statuses</option>'+ST.map(o=>'<option'+(o===fs?' selected':'')+'>'+o+'</option>').join('')+'</select>':'');
+let h='';
+if(tab!=='e'&&tab!=='s'){const A=D.jobs.filter(j=>(j.i||'f')===tab&&(!fs||g(j.id,'s','New')===fs));const V=A.filter(j=>j.k==='v'),Q=A.filter(j=>j.k==='l');
+h='<h2 class="hd">Vacancies</h2>'+(V.length?V.map(job).join(''):'<p class="note">None confirmed in this industry yet.</p>')+'<h2 class="hd">Leads to verify</h2><p class="note">Seen on a board or recruiter page without a verified date or open status. Treat as leads until confirmed on the employer’s own page.</p>'+(Q.length?Q.map(job).join(''):'<p class="note">None.</p>')}
+if(tab==='e')h='<div class="w"><table><tr><th>Employer</th><th>Sector</th><th>Careers page</th><th>Audience</th><th>Basis</th><th>Notes</th></tr>'+D.emp.map((e,i)=>'<tr><td>'+esc(e.n)+'</td><td>'+esc(e.s)+'</td><td>'+(e.c.startsWith('http')?'<a href="'+esc(e.c)+'" target="_blank" rel="noopener">link</a>':'to find')+'</td><td>—</td><td>'+(e.v?'seen in search':'background knowledge, unverified')+'</td><td>'+esc(e.x)+'<br><input data-id="e'+i+'" data-k="n" placeholder="Notes" value="'+esc(g('e'+i,'n',''))+'"></td></tr>').join('')+'</table></div><p class="note">'+D.emp.length+' of a 100-employer target. Audience, social handles and Employer Fit are blank until verified.</p>';
+if(tab==='s')h='<p class="note">Not advertised vacancies. No evidence these employers are hiring. Check each brand’s current feed before you approach; contact channel still to be found.</p>'+D.sp.map(x=>'<article class="c"><h3>'+esc(x.n)+'<span class="t">speculative</span></h3><p>'+esc(x.why)+'</p><p class="g">Your angle: '+esc(x.exp)+' · Arrangement: '+esc(x.arr)+'</p><p>Idea: '+esc(x.idea)+'</p><div class="r"><input data-id="'+x.id+'" data-k="n" placeholder="Notes" value="'+esc(g(x.id,'n',''))+'"></div></article>').join('');
+document.getElementById('root').innerHTML=h}
+function save(){try{localStorage.setItem('jt',JSON.stringify(S))}catch(e){}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(b){tab=b.dataset.tab;render()}});
+document.addEventListener('change',e=>{const t=e.target;if(t.id==='f'){fs=t.value;render();return}
+if(t.dataset&&t.dataset.id){S[t.dataset.id]=S[t.dataset.id]||{};S[t.dataset.id][t.dataset.k]=t.value;save()}});
+render();
+</script></body></html>
