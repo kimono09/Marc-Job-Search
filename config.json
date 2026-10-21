@@ -1,27 +1,161 @@
 {
   "salary_floor": 39000,
-  "max_days_old": 14,
+  "max_days_old": 30,
   "max_scores_per_run": 15,
-  "max_per_industry": {"f": 40, "default": 12},
+  "max_per_industry": {
+    "f": 40,
+    "default": 12
+  },
   "min_score_non_food": 60,
   "model": "claude-haiku-5-5",
   "profile": "Social media manager and content creator with experience in short-form video, photography, editing, food storytelling, campaign planning and audience growth. Wants London roles, ideally in food and hospitality, paying at least 39000 where salary is disclosed.",
-  "queries": ["social media manager restaurant", "content creator hospitality", "social media content manager food", "videographer content creator", "social media manager hotel", "social media manager gallery museum", "content creator fashion brand", "social media manager wellness"],
-  "title_include": ["social", "content", "creator", "videograph", "community", "editor", "brand"],
-  "title_exclude": ["intern", "apprentice", "paid media", "ppc", "seo", "sales", "account director", "data", "engineer", "developer", "accountant"],
-  "food_words": ["restaurant", "food", "drink", "bar ", "cafe", "café", "kitchen", "chef", "pub ", "brewery", "bakery", "pizza", "dining", "culinary", "beverage"],
+  "queries": [
+    "social media manager restaurant",
+    "content creator hospitality",
+    "social media content manager food",
+    "videographer content creator",
+    "social media manager hotel",
+    "social media manager gallery museum",
+    "content creator fashion brand",
+    "social media manager wellness"
+  ],
+  "title_include": [
+    "social",
+    "content",
+    "creator",
+    "videograph",
+    "community",
+    "editor",
+    "brand"
+  ],
+  "title_exclude": [
+    "intern",
+    "apprentice",
+    "paid media",
+    "ppc",
+    "seo",
+    "sales",
+    "account director",
+    "data",
+    "engineer",
+    "developer",
+    "accountant"
+  ],
+  "food_words": [
+    "restaurant",
+    "food",
+    "drink",
+    "bar ",
+    "cafe",
+    "café",
+    "kitchen",
+    "chef",
+    "pub ",
+    "brewery",
+    "bakery",
+    "pizza",
+    "dining",
+    "culinary",
+    "beverage"
+  ],
   "industries": {
-    "h": ["hotel", "luxury", "resort", "five-star", "5-star"],
-    "c": ["museum", "gallery", "theatre", "arts", "heritage", "exhibition"],
-    "r": ["fashion", "retail", "beauty", "apparel", "footwear", "jewellery"],
-    "w": ["wellness", "fitness", "spa", "health club", "yoga"]
+    "h": [
+      "hotel",
+      "luxury",
+      "resort",
+      "five-star",
+      "5-star"
+    ],
+    "c": [
+      "museum",
+      "gallery",
+      "theatre",
+      "arts",
+      "heritage",
+      "exhibition"
+    ],
+    "r": [
+      "fashion",
+      "retail",
+      "beauty",
+      "apparel",
+      "footwear",
+      "jewellery"
+    ],
+    "w": [
+      "wellness",
+      "fitness",
+      "spa",
+      "health club",
+      "yoga"
+    ]
   },
-  "interesting": ["video", "photograph", "creative", "storytelling", "short-form", "reels", "tiktok", "in-house", "film"],
+  "interesting": [
+    "video",
+    "photograph",
+    "creative",
+    "storytelling",
+    "short-form",
+    "reels",
+    "tiktok",
+    "in-house",
+    "film"
+  ],
   "watch": [
-    {"name": "Dishoom", "url": "https://jobs.dishoom.com/", "i": "f"},
-    {"name": "Ottolenghi", "url": "https://careers.ottolenghi.co.uk/", "i": "f"},
-    {"name": "Pizza Pilgrims", "url": "https://pizzapilgrims.teamtailor.com/", "i": "f"},
-    {"name": "The Peninsula London", "url": "https://careers.hshgroup.com/ThePeninsula/", "i": "h"},
-    {"name": "National Theatre", "url": "https://jobs.nationaltheatre.org.uk/", "i": "c"}
-  ]
+    {
+      "name": "Dishoom",
+      "url": "https://jobs.dishoom.com/",
+      "i": "f"
+    },
+    {
+      "name": "Ottolenghi",
+      "url": "https://careers.ottolenghi.co.uk/",
+      "i": "f"
+    },
+    {
+      "name": "Pizza Pilgrims",
+      "url": "https://pizzapilgrims.teamtailor.com/",
+      "i": "f"
+    },
+    {
+      "name": "The Peninsula London",
+      "url": "https://careers.hshgroup.com/ThePeninsula/",
+      "i": "h"
+    },
+    {
+      "name": "National Theatre",
+      "url": "https://jobs.nationaltheatre.org.uk/",
+      "i": "c"
+    }
+  ],
+  "extensive_queries": [
+    "social media manager London",
+    "content manager London",
+    "content creator London",
+    "social media executive London",
+    "digital content producer London",
+    "social media and content manager London",
+    "brand content creator London",
+    "creative content producer London",
+    "videographer social media London",
+    "community manager content London",
+    "marketing executive social media London",
+    "social media officer London",
+    "content strategist London",
+    "TikTok content creator London",
+    "Instagram content creator London",
+    "in-house content creator London",
+    "social media coordinator London",
+    "digital marketing content London",
+    "photographer videographer content London",
+    "content producer fashion London",
+    "social media manager culture arts London",
+    "social media manager music events London",
+    "content manager beauty wellness London",
+    "social media manager retail London",
+    "social media manager charity London",
+    "social media manager technology London",
+    "social media manager finance London"
+  ],
+  "workflow_url": ""
 }
