@@ -145,7 +145,32 @@ def fmt(d):
         return "Unknown"
 
 
+def clearly_closed(url):
+    """Return True only for strong closure evidence; network failures remain unverified."""
+    if not url or not url.startswith(("http://", "https://")):
+        return False
+    try:
+        r = requests.get(url, headers=UA, timeout=12, allow_redirects=True)
+        if r.status_code in (404, 410):
+            return True
+        if r.status_code >= 500:
+            return False
+        body = norm(strip(r.text[:500000]))
+        signals = [
+            "this vacancy is no longer available", "this job is no longer available",
+            "this job has expired", "vacancy has expired", "position has been filled",
+            "applications are now closed", "this role is now closed", "job not found",
+            "vacancy is closed", "no longer accepting applications"
+        ]
+        return any(signal in body for signal in signals)
+    except requests.RequestException:
+        return False
+
+
 def run(sources=None):
+    extensive = os.environ.get("SEARCH_MODE", "quick").lower() == "extensive"
+    queries = list(dict.fromkeys(cfg["queries"] + (cfg.get("extensive_queries", []) if extensive else [])))
+    print(f"Search mode: {'EXTENSIVE' if extensive else 'quick'}; {len(queries)} query phrases")
     if sources is None:
         sources = []
         if os.environ.get("REED_API_KEY"):
@@ -156,7 +181,7 @@ def run(sources=None):
         print("No API keys set: only the curated list and careers-page checks will update.")
     jobs, found, ok_all = state.setdefault("jobs", {}), set(), True
     for fn in sources:
-        for q in cfg["queries"]:
+        for q in queries:
             try:
                 items = list(fn(q))
             except Exception as e:
@@ -189,7 +214,14 @@ def run(sources=None):
             budget -= 1
     alerts = check_watch()
     seed_keys = {key(j["e"], j["t"]) for j in seed["jobs"]}
-    out = [j for j in seed["jobs"] if not (j.get("x") and j["x"] < TODAY)]
+    out = []
+    for j in seed["jobs"]:
+        if j.get("x") and j["x"] < TODAY:
+            continue
+        if clearly_closed(j.get("src", "")):
+            print("Excluded explicitly closed seeded listing:", j.get("t", "(untitled)"))
+            continue
+        out.append(j)
     cap_default = cfg["max_per_industry"]["default"]
     by_ind = {}
     for kk, rec in sorted(jobs.items(), key=lambda kv: (kv[1]["first_seen"], kv[1].get("jm") or 0), reverse=True):
@@ -201,7 +233,7 @@ def run(sources=None):
         if n >= cfg["max_per_industry"].get(rec["i"], cap_default):
             continue
         by_ind[rec["i"]] = n + 1
-        out.append(dict(id=kk, k="l", i=rec["i"], b="job board, unverified", t=rec["t"], e=rec["e"], sal=rec["sal"],
+        out.append(dict(id=kk, k="l", i=rec["i"], b="recent board listing · not employer-verified", t=rec["t"], e=rec["e"], sal=rec["sal"],
                         pub=fmt(rec.get("pub")), fs=fmt(rec["first_seen"]), src=rec["src"], sn=rec["sn"],
                         ev=rec.get("ev") or "Scored text not available.", gap=rec.get("gap") or "Not yet assessed; check the advert.",
                         jm=rec.get("jm")))
