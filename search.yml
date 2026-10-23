@@ -1,0 +1,40 @@
+name: search
+on:
+  schedule:
+    - cron: "0 6,9,12,15,18 * * *"   # five runs a day, UTC
+  workflow_dispatch:
+    inputs:
+      search_mode:
+        description: "Choose a quick refresh or a wider search across more role keywords"
+        required: true
+        type: choice
+        default: quick
+        options:
+          - quick
+          - extensive
+permissions:
+  contents: write
+concurrency:
+  group: search
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python search.py
+        env:
+          SEARCH_MODE: ${{ inputs.search_mode || 'quick' }}
+          REED_API_KEY: ${{ secrets.REED_API_KEY }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - run: |
+          git config user.name "jobsearch-bot"
+          git config user.email "jobsearch-bot@users.noreply.github.com"
+          git add data docs
+          git diff --cached --quiet || (git commit -m "Update $(date -u +%F-%H%M)" && git push)
