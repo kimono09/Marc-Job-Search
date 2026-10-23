@@ -11,6 +11,17 @@ A scheduled GitHub Action searches Reed, Adzuna and a list of careers pages, the
 5. In the Actions tab, open "search" and click "Run workflow" once to test. Choose `extensive` to run the wider set of role keywords across Reed and Adzuna, or `quick` for the normal run. The page’s Extend Search button opens this workflow. After setup it also runs at 06:00, 09:00, 12:00, 15:00 and 18:00 UTC (one hour later in UK summer time).
 6. Open your Pages link. Statuses and notes are saved in your own browser (localStorage), so they are per device.
 
+## Troubleshooting: site updates but no new jobs appear
+
+Open **Actions → search → the latest run → Run search / logs** and inspect the `python search.py` step. It now reports whether Reed and Adzuna credentials are missing, how many raw listings each source returned, and how many passed the filters. Never paste API secret values into an issue or chat.
+
+- If the log says `No API keys set` or warns that credentials are missing, add the repository Actions secrets `REED_API_KEY`, `ADZUNA_APP_ID`, and `ADZUNA_APP_KEY` under **Settings → Secrets and variables → Actions**.
+- If a source reports `401`, `403`, or another API error, check that its key is valid and enabled.
+- If sources return listings but `passed filters` is zero, inspect the filter summary. The current configuration keeps disclosed salaries below £39,000 out and requires matching role-title keywords.
+- After fixing credentials, run the workflow manually in `extensive` mode once.
+
+A green workflow status alone only means the script completed; it does not prove that a job source returned results.
+
 ## How it behaves
 
 - New board listings are always **leads**, never "confirmed open". The tracker checks seeded listing URLs for clear closure signals and drops them when detected. The current API results and repeat sightings reduce stale listings, but do not guarantee that an employer has not closed a role. Check the employer’s own application page before applying; listings not found for two successful runs are hidden. The page deliberately labels board leads as unverified.

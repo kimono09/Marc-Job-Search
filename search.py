@@ -180,7 +180,15 @@ def run(sources=None):
     if not sources:
         print("No API keys set: only the curated list and careers-page checks will update.")
     jobs, found, ok_all = state.setdefault("jobs", {}), set(), True
+    stats = {"queries": len(queries), "sources": [], "raw": 0, "title_rejected": 0,
+             "salary_rejected": 0, "relevance_rejected": 0, "accepted": 0}
+    if not os.environ.get("REED_API_KEY"):
+        print("WARNING: REED_API_KEY is missing; Reed will not be searched.")
+    if not (os.environ.get("ADZUNA_APP_ID") and os.environ.get("ADZUNA_APP_KEY")):
+        print("WARNING: ADZUNA_APP_ID and/or ADZUNA_APP_KEY is missing; Adzuna will not be searched.")
     for fn in sources:
+        source_raw = 0
+        source_accepted = 0
         for q in queries:
             try:
                 items = list(fn(q))
@@ -189,11 +197,20 @@ def run(sources=None):
                 print("source failed:", fn.__name__, q, e)
                 continue
             for it in items:
-                if not relevant(it) or below_floor(it):
+                source_raw += 1
+                stats["raw"] += 1
+                if not relevant(it):
+                    stats["title_rejected"] += 1
+                    continue
+                if below_floor(it):
+                    stats["salary_rejected"] += 1
                     continue
                 ind = industry(it)
                 if ind != "f" and not any(w in (it["title"] + " " + it["desc"]).lower() for w in cfg["interesting"]):
+                    stats["relevance_rejected"] += 1
                     continue
+                stats["accepted"] += 1
+                source_accepted += 1
                 kk = key(it["emp"], it["title"])
                 found.add(kk)
                 rec = jobs.get(kk)
@@ -201,6 +218,9 @@ def run(sources=None):
                     jobs[kk] = rec = dict(first_seen=TODAY, pub=it["posted"], i=ind, jm=None, scored=False)
                 rec.update(last_seen=TODAY, misses=0, closed=False, t=it["title"], e=it["emp"], sal=salary_text(it),
                            src=it["url"], sn=it["src"], desc=it["desc"][:1500], i=ind)
+        stats["sources"].append({"name": fn.__name__, "raw": source_raw, "accepted": source_accepted})
+        print(f"SOURCE SUMMARY {fn.__name__}: {source_raw} raw listings, {source_accepted} passed filters")
+    print("FILTER SUMMARY: " + json.dumps({k: v for k, v in stats.items() if k != "sources"}))
     if sources and ok_all:  # only count misses when every source answered
         for kk, rec in jobs.items():
             if kk not in found and not rec.get("closed"):
