@@ -444,7 +444,7 @@
    "t": "Freelance Social Content Creator / Videographer - Fashion & Lifestyle",
    "e": "Glassworks London",
    "sal": "£45,096 (estimate)",
-   "src": "https://www.adzuna.co.uk/jobs/land/ad/5940228414?se=jCa07RHd8RGpyocehqrolw&utm_medium=api&utm_source=dbc3d9cd&v=5E0283ADCA2DB631186E7A7D8A2508DF095D84D5",
+   "src": "https://www.adzuna.co.uk/jobs/land/ad/5940228414?se=fHm5YUvd8RGV5pg9UqvfBw&utm_medium=api&utm_source=dbc3d9cd&v=5E0283ADCA2DB631186E7A7D8A2508DF095D84D5",
    "sn": "Adzuna",
    "desc": "Founded in London in 2010, Glassworks is a fresh London fashion brand, totally independent, style-obsessed and passionate believers in bricks-and-mortar boutiques as well as streamlined digital shopping. Our design-led stores and website are refreshed weekly with small runs of completely new fashion, meaning a constant feed of exciting new pieces for our customer. Since new products launch weekly, we have a constant need for fast, stylish and commercially useful short-form content. Work Schedul…"
   },
@@ -503,7 +503,7 @@
    "jm": null,
    "scored": false,
    "last_seen": "2026-11-10",
-   "misses": 0,
+   "misses": 1,
    "closed": false,
    "t": "Senior Brand & Campaign Manager",
    "e": "Five Guys",
@@ -551,8 +551,8 @@
    "jm": null,
    "scored": false,
    "last_seen": "2026-11-10",
-   "misses": 1,
-   "closed": false,
+   "misses": 2,
+   "closed": true,
    "t": "Content Creator / Videographer",
    "e": "Lomond Group",
    "sal": "£30,000–£350,000",
@@ -591,12 +591,28 @@
    "src": "https://www.reed.co.uk/jobs/paid-social-marketing-manager/57544240",
    "sn": "Reed",
    "desc": "Our client, a global fast -paced igaming organisation is looking for an experienced Paid Social Manager. The Role We are looking to hire a manager to join our Paid Social team, supporting the continued growth of our clients online casino and bingo brand across international markets. This role will focus on the delivery and optimisation of full-funnel paid social campaigns across key platforms, including Meta, Snapchat, and TikTok. The position i..."
+  },
+  "ae44d06b2cb6": {
+   "first_seen": "2026-11-10",
+   "pub": "2026-11-10",
+   "i": "f",
+   "jm": null,
+   "scored": false,
+   "last_seen": "2026-11-10",
+   "misses": 0,
+   "closed": false,
+   "t": "Full time Content Creator & Creative",
+   "e": "Emerald Hospitality Group",
+   "sal": "£400,000",
+   "src": "https://www.adzuna.co.uk/jobs/details/5960641256?utm_medium=api&utm_source=dbc3d9cd",
+   "sn": "Adzuna",
+   "desc": "GROUP CONTENT CREATOR & CREATIVE Emerald Hospitality Group | Seven Restaurants The Opportunity We are looking for a talented, imaginative and highly creative Group Content Creator & Creative to bring our seven restaurant brands to life through exceptional visual storytelling. This is an exciting opportunity for someone with a natural creative instinct, a passion for food, hospitality, fashion and cult"
   }
  },
  "watch": {
   "https://jobs.dishoom.com/": "42e76f369be44a84e302bbda4d24a6f543ce0958",
   "https://careers.ottolenghi.co.uk/": "b32651f88f677ca41499674ba2769fc12688935d",
-  "https://pizzapilgrims.teamtailor.com/": "7ceb18bc95d74d57c45c44f6511de86ac11df8f4",
+  "https://pizzapilgrims.teamtailor.com/": "5bcf689faa0fac9d0c1f3e0d0caec5d702aef67c",
   "https://careers.hshgroup.com/ThePeninsula/": "e1361490a6ec85f67a735de8ff5699ac1cc7c5af",
   "https://jobs.nationaltheatre.org.uk/": "d4237a9caf053991a8a5689f4a7f6495f7e07dbb"
  }
