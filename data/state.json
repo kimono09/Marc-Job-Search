@@ -23,8 +23,8 @@
    "jm": null,
    "scored": false,
    "last_seen": "2026-11-25",
-   "misses": 1,
-   "closed": false,
+   "misses": 2,
+   "closed": true,
    "t": "Content Producer",
    "e": "Sphere Digital Recruitment",
    "sal": "£50,000–£51,000",
@@ -655,13 +655,29 @@
    "src": "https://www.reed.co.uk/jobs/marketing-communications-manager-social-media-agency-to-loved-brands/57583877",
    "sn": "Reed",
    "desc": "Brand Marketing | Events | Thought Leadership | Social Media | Account-Based Marketing A Brilliant Agency. An Impressive Portfolio. A Story That Deserves to Be Told. Ready to further your marketing career with an established, independent creative and social media agency with an enviable portfolio of well-known brands, a talented team and a reputation built on exceptional work? Every client we’ve won has come through a referral or a recommendatio..."
+  },
+  "6a51f42c7ce8": {
+   "first_seen": "2026-11-26",
+   "pub": "2026-11-26",
+   "i": "f",
+   "jm": null,
+   "scored": false,
+   "last_seen": "2026-11-26",
+   "misses": 0,
+   "closed": false,
+   "t": "Social Media Manager",
+   "e": "The Big Table",
+   "sal": "Not shown",
+   "src": "https://www.reed.co.uk/jobs/social-media-manager/57616008",
+   "sn": "Reed",
+   "desc": "Social Media Manager Location: Based at our Support Office near Oxford Circus, London, this role offers a blend of office-based working, home working, and hands-on content creation and production across our restaurants and venues. Salary: To be discussed The Big Table Group is home to over 200 restaurants across iconic brands, including Bella Italia, Amalfi, Frankie & Benny’s, Banana Tree, Las Iguanas, and more. We’re on the lookout for a So..."
   }
  },
  "watch": {
   "https://jobs.dishoom.com/": "42e76f369be44a84e302bbda4d24a6f543ce0958",
-  "https://careers.ottolenghi.co.uk/": "fe31c80304fcb0374c02f103e92bf3434312f41f",
+  "https://careers.ottolenghi.co.uk/": "521ca993013572acd4122173d9142fbf246e5fb3",
   "https://pizzapilgrims.teamtailor.com/": "207acf9c64fd22932eeb3107bae466941b3d8d45",
   "https://careers.hshgroup.com/ThePeninsula/": "e1361490a6ec85f67a735de8ff5699ac1cc7c5af",
-  "https://jobs.nationaltheatre.org.uk/": "cddf054624048617e8a3346bd08a0dd2db7361f9"
+  "https://jobs.nationaltheatre.org.uk/": "65b60b9c1dcdb07756a63d44a22f3f5a8028048b"
  }
 }
